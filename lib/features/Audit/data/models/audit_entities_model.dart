@@ -1,0 +1,62 @@
+import 'package:sqlite_task/features/Audit/domain/entities/Audit_entities.dart';
+
+class AuditEntitiesModel extends AuditEntities {
+  AuditEntitiesModel({
+    required int auditEntityId,
+    required int auditId,
+    required String auditEntityName,
+    required int auditEntityTypeId,
+    required int auditParentEntityId,
+    required int sequenceNo,
+    required DateTime entityEndDate,
+    required bool isLeafNod,
+    required String barcodeNFC,
+    required int entityLevel,
+    required bool entityException,
+    required String scheduleOccurrenceIds,
+  }) : super(
+      auditEntityId: auditEntityId,
+      auditId: auditId,
+      auditEntityName: auditEntityName,
+      auditEntityTypeId: auditEntityTypeId,
+      auditParentEntityId: auditParentEntityId,
+      sequenceNo: sequenceNo,
+      entityEndDate: entityEndDate,
+      isLeafNod: isLeafNod,
+      barcodeNFC: barcodeNFC,
+      entityLevel: entityLevel,
+      entityException: entityException,
+      scheduleOccurrenceIds: scheduleOccurrenceIds
+  );
+
+  factory AuditEntitiesModel.fromJson(Map<String, dynamic> json) => AuditEntitiesModel(
+    auditEntityId: json["AuditEntityId"],
+    auditId: json["AuditId"],
+    auditEntityName: json["AuditEntityName"],
+    auditEntityTypeId: json["AuditEntityTypeId"],
+    auditParentEntityId: json["AuditParentEntityId"],
+    sequenceNo: json["SequenceNo"],
+    entityEndDate: json["EntityEndDate"] == null ? DateTime.now() : DateTime.parse(json["EntityEndDate"]),
+    isLeafNod: json["IsLeafNode"] ?? false,
+    barcodeNFC: json["BarcodeNFC"] == null ? "" : json["BarcodeNFC"],
+    entityLevel: json["EntityLevel"] ?? 0,
+    entityException: json["EntityException"] == null ? false : json["EntityException"],
+    scheduleOccurrenceIds: json["ScheduleOccurrenceIds"] == null ? "" : json["ScheduleOccurrenceIds"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "AuditEntityId": auditEntityId,
+    "AuditId": auditId,
+    "AuditEntityName": auditEntityName,
+    "AuditEntityTypeId": auditEntityTypeId,
+    "AuditParentEntityId": auditParentEntityId,
+    "SequenceNo": sequenceNo,
+    "EntityEndDate": entityEndDate ?? DateTime.now(),
+    "IsLeafNod": isLeafNod,
+    "BarcodeNFC": barcodeNFC ?? "",
+    "EntityLevel": entityLevel,
+    "EntityException": entityException ?? "",
+    "ScheduleOccurrenceIds": scheduleOccurrenceIds ?? "",
+  };
+
+}
